@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.Creational_patterns.Abstract_Factory;
 using DesignPatterns.Creational_patterns.Factory_Method;
+using DesignPatterns.Creational_patterns.Singleton;
 
 namespace DesignPatterns
 {
@@ -17,6 +18,7 @@ namespace DesignPatterns
 
             Console.WriteLine(car);
             Console.WriteLine(truck);
+
             Console.WriteLine();
             #endregion
 
@@ -31,7 +33,21 @@ namespace DesignPatterns
             Hero paladin = new Hero(new PaladinFactory());
             paladin.Move();
             paladin.Hit();
+
             Console.WriteLine();
+            #endregion
+
+            #region Singleton
+
+            var userProfile1 = UserProfile.LogIn("User1");
+
+            var userProfile2 = UserProfile.LogIn("User2");
+
+            if (userProfile1 == userProfile2)
+            {
+                Console.WriteLine("Both users are Identical");
+            }
+
             #endregion
         }
     }
