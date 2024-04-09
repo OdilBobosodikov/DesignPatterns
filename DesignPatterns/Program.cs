@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.Creational_patterns.Abstract_Factory;
 using DesignPatterns.Creational_patterns.Factory_Method;
+using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
 
 namespace DesignPatterns
@@ -20,6 +21,7 @@ namespace DesignPatterns
             Console.WriteLine(truck);
 
             Console.WriteLine();
+
             #endregion
 
             #region Abstract Factory
@@ -35,6 +37,7 @@ namespace DesignPatterns
             paladin.Hit();
 
             Console.WriteLine();
+
             #endregion
 
             #region Singleton
@@ -47,6 +50,29 @@ namespace DesignPatterns
             {
                 Console.WriteLine("Both users are Identical");
             }
+
+            Console.WriteLine();
+
+            #endregion
+
+            #region Prototype
+
+            IFigure rectangle = new Rectangle(10, 20);
+            IFigure clonedRectangle = rectangle.Clone();
+            
+            rectangle.GetInfo();
+            clonedRectangle.GetInfo();
+
+
+            Console.WriteLine();
+
+            IFigure circle = new Circle(10);
+            IFigure clonedCircle = circle.Clone();
+
+            circle.GetInfo();
+            clonedCircle.GetInfo();
+
+            Console.WriteLine();
 
             #endregion
         }
