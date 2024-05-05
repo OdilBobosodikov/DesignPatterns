@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Creational_patterns.Abstract_Factory;
+using DesignPatterns.Creational_patterns.Builder;
 using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
@@ -74,6 +75,24 @@ namespace DesignPatterns
 
             Console.WriteLine();
 
+            #endregion
+
+
+            #region Builder
+
+            Bakery baker = new Bakery();
+            
+            BreadBuilder builder = new RyeBreadBuilder();
+            
+            Bread ryeBread = baker.Bake(builder);
+            Console.WriteLine(ryeBread.ToString());
+            
+            builder = new WheatBreadBuilder();
+            
+            Bread wheatBread = baker.Bake(builder);
+            Console.WriteLine(wheatBread.ToString());
+
+            Console.WriteLine();
             #endregion
         }
     }
