@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Creational_patterns.Abstract_Factory;
+﻿using DesignPatterns.Behavioral_patterns.Strategy;
+using DesignPatterns.Creational_patterns.Abstract_Factory;
 using DesignPatterns.Creational_patterns.Builder;
 using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
@@ -12,88 +13,101 @@ namespace DesignPatterns
         {
             #region Factory pattern
 
-            var BMW = new CarManufacturer("BMW");
-            var car = BMW.Manufacture();
+            //var BMW = new CarManufacturer("BMW");
+            //var car = BMW.Manufacture();
 
-            var MAN = new TruckManufacturer("MAN");
-            var truck = MAN.Manufacture();
+            //var MAN = new TruckManufacturer("MAN");
+            //var truck = MAN.Manufacture();
 
-            Console.WriteLine(car);
-            Console.WriteLine(truck);
+            //Console.WriteLine(car);
+            //Console.WriteLine(truck);
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #endregion
 
             #region Abstract Factory
 
-            Hero elf = new Hero(new ElfFactory());
-            elf.Move();
-            elf.Hit();
+            //Hero elf = new Hero(new ElfFactory());
+            //elf.Move();
+            //elf.Hit();
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            Hero paladin = new Hero(new PaladinFactory());
-            paladin.Move();
-            paladin.Hit();
+            //Hero paladin = new Hero(new PaladinFactory());
+            //paladin.Move();
+            //paladin.Hit();
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #endregion
 
             #region Singleton
 
-            var userProfile1 = UserProfile.LogIn("User1");
+            //var userProfile1 = UserProfile.LogIn("User1");
 
-            var userProfile2 = UserProfile.LogIn("User2");
+            //var userProfile2 = UserProfile.LogIn("User2");
 
-            if (userProfile1 == userProfile2)
-            {
-                Console.WriteLine("Both users are Identical");
-            }
+            //if (userProfile1 == userProfile2)
+            //{
+            //    Console.WriteLine("Both users are Identical");
+            //}
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #endregion
 
             #region Prototype
 
-            IFigure rectangle = new Rectangle(10, 20);
-            IFigure clonedRectangle = rectangle.Clone();
-            
-            rectangle.GetInfo();
-            clonedRectangle.GetInfo();
+            //IFigure rectangle = new Rectangle(10, 20);
+            //IFigure clonedRectangle = rectangle.Clone();
+
+            //rectangle.GetInfo();
+            //clonedRectangle.GetInfo();
 
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            IFigure circle = new Circle(10);
-            IFigure clonedCircle = circle.Clone();
+            //IFigure circle = new Circle(10);
+            //IFigure clonedCircle = circle.Clone();
 
-            circle.GetInfo();
-            clonedCircle.GetInfo();
+            //circle.GetInfo();
+            //clonedCircle.GetInfo();
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             #endregion
-
 
             #region Builder
 
-            Bakery baker = new Bakery();
-            
-            BreadBuilder builder = new RyeBreadBuilder();
-            
-            Bread ryeBread = baker.Bake(builder);
-            Console.WriteLine(ryeBread.ToString());
-            
-            builder = new WheatBreadBuilder();
-            
-            Bread wheatBread = baker.Bake(builder);
-            Console.WriteLine(wheatBread.ToString());
+            //Bakery baker = new Bakery();
 
-            Console.WriteLine();
+            //BreadBuilder builder = new RyeBreadBuilder();
+
+            //Bread ryeBread = baker.Bake(builder);
+            //Console.WriteLine(ryeBread.ToString());
+
+            //builder = new WheatBreadBuilder();
+
+            //Bread wheatBread = baker.Bake(builder);
+            //Console.WriteLine(wheatBread.ToString());
+
+            //Console.WriteLine();
+
             #endregion
+
+            #region Strategy 
+
+            //Example Hybrid car changes his driving method
+
+            CarStrategy car = new CarStrategy("BYD", "Chazor", new GasDrive());
+            car.Drive();
+
+            car.DrivingMethod = new ElectricDrive();
+            car.Drive();
+
+            #endregion 
+
         }
     }
 }
