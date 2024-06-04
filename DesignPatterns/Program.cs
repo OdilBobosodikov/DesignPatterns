@@ -1,9 +1,13 @@
-﻿using DesignPatterns.Behavioral_patterns.Strategy;
+﻿using DesignPatterns.Behavioral_patterns;
+using DesignPatterns.Behavioral_patterns.Command;
+using DesignPatterns.Behavioral_patterns.Observer;
+using DesignPatterns.Behavioral_patterns.Strategy;
 using DesignPatterns.Creational_patterns.Abstract_Factory;
 using DesignPatterns.Creational_patterns.Builder;
 using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DesignPatterns
 {
@@ -11,6 +15,8 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            #region Creational patterns
+
             #region Factory pattern
 
             //var BMW = new CarManufacturer("BMW");
@@ -96,18 +102,80 @@ namespace DesignPatterns
 
             #endregion
 
+            #endregion
+
+            #region Behavioral patterns
+
             #region Strategy 
 
-            //Example Hybrid car changes his driving method
+            ////Example Hybrid car changes his driving method
+            //CarStrategy car = new CarStrategy("BYD", "Chazor", new GasDrive());
+            //car.Drive();
 
-            CarStrategy car = new CarStrategy("BYD", "Chazor", new GasDrive());
-            car.Drive();
+            //car.DrivingMethod = new ElectricDrive();
+            //car.Drive();
 
-            car.DrivingMethod = new ElectricDrive();
-            car.Drive();
+            #endregion
 
-            #endregion 
+            #region Observer
 
+            ////Brokers cant assign to stock, only stock can assign them
+            ////Banks have a two-way subscriprion
+            //var stockInfo = new StockInfo() { USD = 50, EUR = 20 };
+
+            ////Register Observers from Observable
+            //var brokersList = new List<IObserver> { new Broker("Mike", stockInfo), new Broker("Liam", stockInfo), new Bank("SQB", stockInfo)};
+            //Stock stock = new Stock(stockInfo, brokersList);
+
+            ////Register Observable from Observer
+            //var bank = new Bank("Ipoteka", stock, stockInfo);
+
+            //stock.MarketChanges();
+            //stock.NotifyObservers();
+
+            #endregion
+
+            #region Command
+
+            RemoteController rc = new RemoteController();
+            TV tv = new TV();
+
+            //Generate command
+            TVCommand tVCommand = new TVCommand(tv);
+
+            //Assign command to Executer
+            rc.SetCommand(tVCommand);
+            rc.PressButton();
+            rc.PressUndo();
+
+            //Here we call Undo while command is executed
+            Microwave microwave = new Microwave();
+            rc.SetCommand(new MicrowaveCommand(microwave, 10, new CancellationTokenSource()));
+            rc.PressButton();
+            Thread.Sleep(3000);
+            rc.PressUndo();
+
+            //we save all commands in stack to undo all changes
+            Volume volume = new Volume();
+            MultiRemoter mPult = new MultiRemoter();
+            mPult.SetCommand(0, new TVCommand(tv));
+            mPult.SetCommand(1, new VolumeCommand(volume));
+
+            mPult.PressButton(0);
+
+            mPult.PressButton(1);
+            mPult.PressButton(1);
+            mPult.PressButton(1);
+
+            mPult.PressUndoButton();
+            mPult.PressUndoButton();
+            mPult.PressUndoButton();
+            mPult.PressUndoButton();
+            #endregion
+
+            #endregion
+
+            Console.ReadLine();
         }
     }
 }
