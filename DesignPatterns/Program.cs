@@ -1,12 +1,16 @@
 ﻿using DesignPatterns.Behavioral_patterns;
 using DesignPatterns.Behavioral_patterns.Command;
+using DesignPatterns.Behavioral_patterns.Iterator;
 using DesignPatterns.Behavioral_patterns.Observer;
+using DesignPatterns.Behavioral_patterns.State;
 using DesignPatterns.Behavioral_patterns.Strategy;
+using DesignPatterns.Behavioral_patterns.Template_Method;
 using DesignPatterns.Creational_patterns.Abstract_Factory;
 using DesignPatterns.Creational_patterns.Builder;
 using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
+using DesignPatterns.SOLID.S;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DesignPatterns
@@ -15,6 +19,8 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            #region Design patterns
+
             #region Creational patterns
 
             #region Factory pattern
@@ -137,44 +143,102 @@ namespace DesignPatterns
 
             #region Command
 
-            RemoteController rc = new RemoteController();
-            TV tv = new TV();
+            //RemoteController rc = new RemoteController();
+            //TV tv = new TV();
 
-            //Generate command
-            TVCommand tVCommand = new TVCommand(tv);
+            ////Generate command
+            //TVCommand tVCommand = new TVCommand(tv);
 
-            //Assign command to Executer
-            rc.SetCommand(tVCommand);
-            rc.PressButton();
-            rc.PressUndo();
+            ////Assign command to Executer
+            //rc.SetCommand(tVCommand);
+            //rc.PressButton();
+            //rc.PressUndo();
 
-            //Here we call Undo while command is executed
-            Microwave microwave = new Microwave();
-            rc.SetCommand(new MicrowaveCommand(microwave, 10, new CancellationTokenSource()));
-            rc.PressButton();
-            Thread.Sleep(3000);
-            rc.PressUndo();
+            ////Here we call Undo while command is executed
+            //Microwave microwave = new Microwave();
+            //rc.SetCommand(new MicrowaveCommand(microwave, 10, new CancellationTokenSource()));
+            //rc.PressButton();
+            //Thread.Sleep(3000);
+            //rc.PressUndo();
 
-            //we save all commands in stack to undo all changes
-            Volume volume = new Volume();
-            MultiRemoter mPult = new MultiRemoter();
-            mPult.SetCommand(0, new TVCommand(tv));
-            mPult.SetCommand(1, new VolumeCommand(volume));
+            ////we save all commands in stack to undo all changes
+            //Volume volume = new Volume();
+            //MultiRemoter mPult = new MultiRemoter();
+            //mPult.SetCommand(0, new TVCommand(tv));
+            //mPult.SetCommand(1, new VolumeCommand(volume));
 
-            mPult.PressButton(0);
+            //mPult.PressButton(0);
 
-            mPult.PressButton(1);
-            mPult.PressButton(1);
-            mPult.PressButton(1);
+            //mPult.PressButton(1);
+            //mPult.PressButton(1);
+            //mPult.PressButton(1);
 
-            mPult.PressUndoButton();
-            mPult.PressUndoButton();
-            mPult.PressUndoButton();
-            mPult.PressUndoButton();
+            //mPult.PressUndoButton();
+            //mPult.PressUndoButton();
+            //mPult.PressUndoButton();
+            //mPult.PressUndoButton();
+
+            #endregion
+
+            Water water = new Water();
+            water.Heat();
+            water.Freeze();
+            water.Freeze();
+            water.Freeze();
+            water.Heat();
+
+            #region Template Method
+
+            //List<Education> educationsSystems = new List<Education>() {new School(), new University() };
+
+            //foreach (var system in educationsSystems)
+            //{
+            //    system.Learn();
+            //}
+
+            #endregion
+
+            #region Iterator
+
+            //Library library = new Library(new Book[] { new Book() {Name = "War and Piece" },
+            //                              new Book() {Name = "Witcher: Last Wish" },
+            //                              new Book() {Name = "C# in a nutshell"} });
+
+            //Reader reader = new Reader();
+            //reader.SeeBooks(library);
+
+            #endregion
+
+            #region State
+
+
+
             #endregion
 
             #endregion
 
+
+            #endregion
+
+            #region SOLID
+
+            /*  SOLID stands for:
+             *  S - Single Responsibility Principle 
+             *  O - Open/Closed Principle 
+             *  L - Liskov Substitution Principle 
+             *  I - Interface Segregation Principle 
+             *  D - Dependency Inversion Principle */
+
+            #region S - Single Responsibility Principle
+
+            //MobileStore ms = new MobileStore(new ConsolePhoneReader(), new GeneralPhoneBinder(), new GeneralPhoneValidator(), new TextPhoneSaver());
+            //ms.Process();
+
+            #endregion
+
+
+
+            #endregion
             Console.ReadLine();
         }
     }
