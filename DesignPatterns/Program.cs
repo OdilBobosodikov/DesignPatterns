@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Behavioral_patterns;
+using DesignPatterns.Behavioral_patterns.Chain_of_responsobility;
 using DesignPatterns.Behavioral_patterns.Command;
 using DesignPatterns.Behavioral_patterns.Iterator;
 using DesignPatterns.Behavioral_patterns.Observer;
@@ -11,6 +12,7 @@ using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
 using DesignPatterns.SOLID.S;
+using DesignPatterns.Structural_patterns.Decorator;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DesignPatterns
@@ -180,13 +182,6 @@ namespace DesignPatterns
 
             #endregion
 
-            Water water = new Water();
-            water.Heat();
-            water.Freeze();
-            water.Freeze();
-            water.Freeze();
-            water.Heat();
-
             #region Template Method
 
             //List<Education> educationsSystems = new List<Education>() {new School(), new University() };
@@ -211,12 +206,68 @@ namespace DesignPatterns
 
             #region State
 
+            //Water water = new Water();
+            //water.Heat();
+            //water.Freeze();
+            //water.Freeze();
+            //water.Freeze();
+            //water.Heat();
+
+            #endregion
+
+            #region Chain of responsobility
+
+            //Receiver receiver = new Receiver(true, false, true);
+
+            //List<PaymentHandler> paymeTransfers = new List<PaymentHandler>() { new CashTransfer(), new PaymeTransfer(), new BankTransfer()};
+
+            //paymeTransfers[0].paymentHandler = paymeTransfers[1];
+            //paymeTransfers[1].paymentHandler = paymeTransfers[2];
+
+            //paymeTransfers[0].Handle(receiver);
+
+            #endregion
+
+            #region Momento
+
+            //Behavioral_patterns.Memento.Hero hero = new Behavioral_patterns.Memento.Hero(3, 3);
+
+            //hero.GetDammage();
+            //hero.Shoot();
+            //hero.Shoot();
+            //hero.SaveMemento();
+            //hero.GetDammage();
+            //hero.GetDammage();
 
 
             #endregion
 
+            //TODO: Mediator, Interpreter and Visitor
+
             #endregion
 
+            #region Structural patterns
+
+            #region Decorator
+
+            Pizza pizza = new ItalianPizza();
+            Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
+            pizza = new PepperoniPizza(pizza);
+            Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
+
+            Pizza pizza1 = new BulgerianPizza();
+            Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
+            pizza1 = new CheesePizza(pizza1);
+            Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
+
+            Pizza pizza3 = new BulgerianPizza();
+            pizza3 = new PepperoniPizza(pizza3);
+            pizza3 = new CheesePizza(pizza3);
+            Console.WriteLine($"{pizza3.Name} casts {pizza3.GetCost()}");
+
+            #endregion
+
+            #endregion
 
             #endregion
 
@@ -239,6 +290,7 @@ namespace DesignPatterns
 
 
             #endregion
+
             Console.ReadLine();
         }
     }
