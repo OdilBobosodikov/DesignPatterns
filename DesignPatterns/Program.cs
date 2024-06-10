@@ -2,6 +2,7 @@
 using DesignPatterns.Behavioral_patterns.Chain_of_responsobility;
 using DesignPatterns.Behavioral_patterns.Command;
 using DesignPatterns.Behavioral_patterns.Iterator;
+using DesignPatterns.Behavioral_patterns.Mediator;
 using DesignPatterns.Behavioral_patterns.Observer;
 using DesignPatterns.Behavioral_patterns.State;
 using DesignPatterns.Behavioral_patterns.Strategy;
@@ -11,8 +12,15 @@ using DesignPatterns.Creational_patterns.Builder;
 using DesignPatterns.Creational_patterns.Factory_Method;
 using DesignPatterns.Creational_patterns.Prototype;
 using DesignPatterns.Creational_patterns.Singleton;
+using DesignPatterns.SOLID.I;
+using DesignPatterns.SOLID.O.CookStrategy;
+using DesignPatterns.SOLID.O.CookTmplate;
+using DesignPatterns.SOLID.O.CooktTmplate;
 using DesignPatterns.SOLID.S;
+using DesignPatterns.Structural_patterns.Adapter;
 using DesignPatterns.Structural_patterns.Decorator;
+using DesignPatterns.Structural_patterns.Facade;
+using System.Diagnostics.Metrics;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DesignPatterns
@@ -242,7 +250,25 @@ namespace DesignPatterns
 
             #endregion
 
-            //TODO: Mediator, Interpreter and Visitor
+            #region Mediator
+
+            //Manager management = new Manager();
+
+            //Colleague customer = new CustomerColleague(management);
+            //Colleague programmer = new ProgrammerColleague(management);
+            //Colleague HR = new HRColleague(management);
+
+            //management.Customer = customer;
+            //management.Programmer = programmer;
+            //management.HR = HR;
+
+            //customer.Send("We need to implement all features by Tuesday");
+            //programmer.Send("OK, we will work on it");
+            //HR.Send("We need to hire more people!");
+
+            #endregion
+
+            //TODO: Visitor
 
             #endregion
 
@@ -250,22 +276,75 @@ namespace DesignPatterns
 
             #region Decorator
 
-            Pizza pizza = new ItalianPizza();
-            Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
-            pizza = new PepperoniPizza(pizza);
-            Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
+            //Pizza pizza = new ItalianPizza();
+            //Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
+            //pizza = new PepperoniPizza(pizza);
+            //Console.WriteLine($"{pizza.Name} casts {pizza.GetCost()}");
 
-            Pizza pizza1 = new BulgerianPizza();
-            Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
-            pizza1 = new CheesePizza(pizza1);
-            Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
+            //Pizza pizza1 = new BulgerianPizza();
+            //Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
+            //pizza1 = new CheesePizza(pizza1);
+            //Console.WriteLine($"{pizza1.Name} casts {pizza1.GetCost()}");
 
-            Pizza pizza3 = new BulgerianPizza();
-            pizza3 = new PepperoniPizza(pizza3);
-            pizza3 = new CheesePizza(pizza3);
-            Console.WriteLine($"{pizza3.Name} casts {pizza3.GetCost()}");
+            //Pizza pizza3 = new BulgerianPizza();
+            //pizza3 = new PepperoniPizza(pizza3);
+            //pizza3 = new CheesePizza(pizza3);
+            //Console.WriteLine($"{pizza3.Name} casts {pizza3.GetCost()}");
 
             #endregion
+
+            #region Adapter
+
+            //Traveler traveler = new Traveler();
+
+            //traveler.Travel(new Structural_patterns.Adapter.Car());
+            //traveler.Travel(new AnimalToTransportAdapter(new Horse()));
+            //traveler.Travel(new AnimalToTransportAdapter(new Camel()));
+
+            #endregion
+
+            #region Facade
+
+            //Facade is used to simplify the usage of complex sistem
+            //TextEditor textEditor = new TextEditor();
+            //Compiller compiller = new Compiller();
+            //CLR clr = new CLR();
+
+            //VisualStudioFacade ide = new VisualStudioFacade(compiller,textEditor, clr);
+
+            //Client client = new Client();
+            //client.CreateApplication(ide);
+
+            #endregion
+
+            #region Composite
+
+            //Structural_patterns.Composite.Component fileSystem = new Structural_patterns.Composite.Directory("File system");
+            //Structural_patterns.Composite.Component diskC = new Structural_patterns.Composite.Directory("Disk C");
+            //Structural_patterns.Composite.Component docxFile = new Structural_patterns.Composite.File("text.docx");
+            //Structural_patterns.Composite.Component pngFile = new Structural_patterns.Composite.File("test.png");
+
+            // diskC.Add(pngFile);
+            // diskC.Add(docxFile);
+            // fileSystem.Add(diskC);
+
+            // fileSystem.Print();
+            // Console.WriteLine();
+
+            // diskC.Remove(pngFile);
+
+            // Structural_patterns.Composite.Component docsFolder = new Structural_patterns.Composite.Directory("new folder");
+            // Structural_patterns.Composite.Component txtFile = new Structural_patterns.Composite.File("readme.txt");
+            // Structural_patterns.Composite.Component csFile = new Structural_patterns.Composite.File("Program.cs");
+            // docsFolder.Add(txtFile);
+            // docsFolder.Add(csFile);
+            // diskC.Add(docsFolder);
+
+            // fileSystem.Print();
+
+            #endregion
+
+
 
             #endregion
 
@@ -287,7 +366,31 @@ namespace DesignPatterns
 
             #endregion
 
+            #region O - Open/Closed Principle 
 
+            ////software entities (classes, modules, functions, and so on) should be open for extension, but closed for modification.
+            ////That means that we cannot change the code, we can only extend it
+
+            ////To add new functionality  we need to redesign whole method
+            //Cook cook = new Cook("Jerry, the mashed potato maker");
+            //cook.MakeDinner();
+
+            //Console.WriteLine();
+
+            ////In both cases to add a new meal we do not need to change initial architecture
+
+            ////Implemented Open/Closed Principle using strategy 
+            //CookStrategy cook2 = new CookStrategy("Tom, cook that can do any dish!");
+            //List<IMeal> order = new List<IMeal> { new MashPotato(), new Salad() };
+            //cook2.MakeDinner(order);
+
+            ////Implemented Open/Closed Principle using Template method
+            //CookTemplate cook3 = new CookTemplate("Liam, cook that can do any dish!");
+            //List<MealBase> order1 = new List<MealBase> { new PotatoMeal(), new SaladMeal() };
+            //cook3.MakeDinner(order1);
+
+
+            #endregion
 
             #endregion
 
